@@ -63,7 +63,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-@import '//at.alicdn.com/t/c/font_4392738_nh9bnb6nv4d.css';
  #card {
   width: 100%;
   height: 100%;

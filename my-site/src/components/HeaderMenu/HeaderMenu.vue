@@ -2,8 +2,8 @@
 <template>
   <div id="headerMenu">
     <!-- 最左边显示logo -->
-    <div class="logoImage" @click="goToHomePage">
-      <LogoImage></LogoImage>
+    <div class="logoImage" >
+      <LogoImage @click="goToHomePage"></LogoImage>
     </div>
     <!-- 最右边登录按钮/头像显示 -->
     <div class="login">
@@ -22,12 +22,18 @@
 import LogoImage from './LogoImage/LogoImage.vue';
 import LoginButton from './Login/LoginButton/LoginButton.vue';
 import LoginImage from './Login/LoginImage/LoginImage.vue';
-import { defineComponent } from "vue";
+import { computed, defineComponent,ref } from "vue";
+import { useStore } from "vuex";
 export default defineComponent({
   name: 'HeaderMenu',
-  data() {
+  setup() {
+    const store = useStore();
+    const isSelected = computed(()=>store.state.isSelected);
+    const loginShow = ref(true);
     return {
-      loginShow: true,
+      loginShow,
+      store,
+      isSelected
     }
   },
   components: {
@@ -37,6 +43,7 @@ export default defineComponent({
   },
   methods: {
     goToHomePage() { 
+      this.store.commit('handleSelected', 0);
       this.$router.push('/'); 
     }
   }

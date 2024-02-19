@@ -1,0 +1,186 @@
+<!-- 三分内容显示 -->
+<template>
+  <div id="threePoint">
+    <ul class="contentList">
+        <!-- Nba的三分命中率 -->
+        <li v-if="'/data/nba/threepoint' === dataMenuRoute">
+          <table class="threePointTable">
+            <!-- 数据标题 -->
+            <tr class="title">
+              <td>排名</td>
+              <td>球员</td>
+              <td>球队</td>
+              <td>三分命中率</td>
+              <td>三分命中数</td>
+              <td>场次</td>
+              <td>上场时间</td>
+            </tr>
+            <!--  数据 -->
+            <tr class="data" v-for="item in nbaThreePointData">
+              <td>{{ item.order }}</td>
+              <td>{{ item.name }}</td>
+              <td>{{ item.team }}</td>
+              <td>{{ item.percentages }}</td>
+              <td>{{ item.count }}</td>
+              <td>{{ item.session }}</td>
+              <td>{{ item.time }}</td>
+
+            </tr>
+          </table>
+        </li>
+        <!-- CBA联赛的得分 -->
+        <li v-if="'/data/cba/threepoint' === dataMenuRoute">
+          <table class="threePointTable">
+              <!-- 数据标题 -->
+              <tr class="title">
+                <td>排名</td>
+                <td>球员</td>
+                <td>球队</td>
+                <td>三分命中率</td>
+                <td>三分命中数</td>
+                <td>场次</td>
+                <td>上场时间</td>
+              </tr>
+              <!--  数据 -->
+              <tr class="data" v-for="item in cbaThreePointData">
+                <td>{{ item.order }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.team }}</td>
+                <td>{{ item.percentages }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.session }}</td>
+                <td>{{ item.time }}</td>
+
+              </tr>
+            </table>
+        </li>
+      </ul>
+  </div>
+</template>
+
+<script>
+import { computed, defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+export default defineComponent({
+  setup() {
+    const store = useStore();
+    const dataMenuRoute = ref('');
+    const nbaThreePointData = ref([
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+
+    ]);
+    const cbaThreePointData = ref([
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      
+    ]);
+    return {
+      store,
+      dataMenuRoute,
+      nbaThreePointData,
+      cbaThreePointData
+    }
+  },
+  mounted() {
+    this.changeMenuDataCenter();
+    this.dataMenuRoute = this.$route.path;
+    this.$store.commit('changeDataRoute', this.dataMenuRoute);
+  },
+  methods: {
+    // 刷新后还是命中原来的的选项
+    changeMenuDataCenter() {
+      this.store.commit('handleDataCenter', 2);
+    }
+  }
+})
+</script>
+
+<style scoped lang="less">
+  #threePoint {
+    width: 100%;
+    height: 100%;
+    .contentList {
+      list-style: none;
+      li {
+        .threePointTable {
+          width: 100%;
+          height: 100%;
+          tr {
+            display: block;
+            border-bottom: 1px solid rgb(156, 154, 154);
+            padding: 10px 0;
+          }
+          .title {
+            display: block;
+            margin-bottom: 10px;
+            background-color: rgb(231, 231, 231);
+            td:first-child {
+              display: inline-block;
+              margin-left: 10px;
+              width: 40px;
+            }
+            td:nth-child(2){
+              width: 160px;
+            }
+            td {
+              width: 150px;
+              display: inline-block;
+              text-align: center;
+              color: grey;
+              font-size: 20px;
+              
+            }
+          }
+          .data {
+            display: block;
+            margin-bottom: 10px;
+            
+            td:first-child {
+              display: inline-block;
+              margin-left: 10px;
+              width: 40px;
+            }
+            td:nth-child(2){
+              width: 160px;
+            }
+            td {
+              width: 150px;
+              display: inline-block;
+              margin-left: 0px;
+              text-align: center;
+              font-size: 16px;
+              color: rgb(32, 31, 31);
+            }
+          }
+        }
+      }
+    }
+  }
+
+</style>

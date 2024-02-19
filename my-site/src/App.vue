@@ -7,8 +7,9 @@
 <style lang="less" scoped>
 @import './styles/mixins.less';
 #app {
-  width: 1536px;
-  height: 750px;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   .BackgroundGradient;
 }
 </style>

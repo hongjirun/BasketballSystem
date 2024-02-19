@@ -30,13 +30,13 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-@import '../../styles/mixins.less';
 #home {
   width: 100%;
   height: 100%;
   .card {
     width: 100%;
     height: 100%;
+    overflow: auto;
   }
  
   
