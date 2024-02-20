@@ -30,6 +30,7 @@ export default defineComponent({
     const store = useStore();
     const isSelected = computed(()=>store.state.isSelected);
     const loginShow = ref(true);
+    
     return {
       loginShow,
       store,

@@ -29,23 +29,29 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import { useStore } from "vuex";
 import { getNbaNews } from '../../../api/news';
 export default defineComponent({
   setup() {
+    const store = useStore();
     const getNew = ref([]); 
     return {
       getNew,
+      store
     }
   },
   methods: {
-    
+    leagueList() {
+      this.store.commit('handleLeague', 0);
+    },
   },
   mounted() { 
-    getNbaNews().then((res) => { 
+    getNbaNews().then((res) => {
 
       this.getNew = res.data;
-      
-    })
+
+    });
+    this.leagueList();
   }
 })
 </script>

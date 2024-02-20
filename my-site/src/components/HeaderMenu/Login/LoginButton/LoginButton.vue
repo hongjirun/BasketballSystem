@@ -1,13 +1,26 @@
 <template>
   <div id="loginButton">
-    <button>登录/注册</button>
+    <button @click="openLoginInput(true)">登录/注册</button>
   </div>
 </template>
 
 <script>
-export default {
+import { defineComponent, ref } from "vue";
+import { useStore } from "vuex";
+export default defineComponent({
+  setup() {
+    const store = useStore();
 
-}
+    return {
+      store
+    }
+  },
+  methods: {
+    openLoginInput(bool) {
+      this.store.commit('changeLogin', bool);
+    }
+  }
+})
 </script>
 
 <style lang="less" scoped>

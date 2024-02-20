@@ -42,7 +42,9 @@ export default createStore({
     ],
     
     // 数据中心点击路径
-    dataMenuRoute:'',
+    dataMenuRoute: '',
+    // 进行登录时的蒙版和是否登录
+    logining: false,
   },
   mutations: {
     //左边菜单栏选择命中提交
@@ -80,7 +82,10 @@ export default createStore({
     changeDataRoute(state,payload) { 
       state.dataMenuRoute = payload;
     },
-    
+    // 进行登录时的蒙版和是否登录
+    changeLogin(state,payload) { 
+      state.logining = payload;
+    }
   },
   actions: {
   },

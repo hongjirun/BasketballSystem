@@ -30,23 +30,29 @@
 
 <script>
 import { defineComponent, ref } from 'vue';
+import { useStore } from "vuex";
 import { getCbaNews } from '../../../api/news';
 export default defineComponent({
   setup() {
+    const store = useStore();
     const getNew = ref([]);
     return {
       getNew,
+      store
     }
   },
   methods: {
-
+    leagueList() {
+      this.store.commit('handleLeague', 1);
+    },
   },
   mounted() {
     getCbaNews().then((res) => {
 
       this.getNew = res.data;
 
-    })
+    });
+    this.leagueList();
   }
 })
 </script>
