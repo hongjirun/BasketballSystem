@@ -10,12 +10,12 @@
       <div class="showMessage">
         <div class="name">
           <span>留言</span>
-          <span>({{ message.length - 1 }})</span>
+          <span >({{ getMessageData.length  }})</span>
         </div>
         <ul class="messageList">
-          <li v-for="(item,index) in message">
+          <li v-for="(item,index) in getMessageData">
             <div class="leftImg">
-              <img :src="item.userImg" alt="" width="50px" height="50px">
+              <img :src="item.img" alt="" width="50px" height="50px">
             </div>
             <div class="right">
               <div class="header">
@@ -25,7 +25,7 @@
               <div class="messageContent">
                 {{ item.messageContent }}
               </div>
-              <div class="time">{{ item.time }}</div>
+              <div class="time">{{ item.messageTime }}</div>
             </div>
           </li>
           
@@ -37,25 +37,27 @@
 </template>
 
 <script >
-import { defineComponent,ref } from "vue";
+import { defineComponent,ref,computed } from "vue";
 import MessageInput from './MessageInput/MessageInput.vue';
+import { getMessage } from "../../../api/message";
+import { useStore } from "vuex";
 export default defineComponent({
   setup() { 
     const currentTime = ref('');
-    const message = ref([
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-      { userName: '浪漫百事猪脚饭', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', messageContent: '勇士总冠军', time: '2021-02-15 01:40' },
-    ]);
+    const store = useStore();
+    const userInfo = computed(() => store.state.userInfo);
+    const userName = ref('');
+    const userImg = ref('');
+    const getMessage = ref([]);
+    const getMessageData = ref([]);
     return {
       currentTime,
-      message,
+      getMessage,
+      store,
+      userInfo,
+      userName,
+      userImg,
+      getMessageData
       
     }
   },
@@ -65,8 +67,24 @@ export default defineComponent({
   methods: {
     // 获取子组件传递的留言信息和当前时间
     getMessageTime(data_1,data_2) { 
-      this.message.push({ userName:'ICDET', userImg: 'https://img0.baidu.com/it/u=2556866575,3001292839&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500' ,messageContent:data_1,time:data_2})
+      this.getMessageData.push({ userName:this.userName, img: this.userImg ,messageContent:data_1,messageTime:data_2})
+      this.store.commit('getMessageInfo', [ data_1, data_2 ]);
+      console.log(this.userInfo);
     },
+    
+  },
+  mounted() {
+    this.userName = this.userInfo.userName;
+    this.userImg = this.userInfo.img;
+    getMessage().then(res => {
+      this.getMessage = res.data; 
+      for (let i = 0; i < this.getMessage.length; i++) { 
+        this.getMessageData[i] = this.getMessage[i];
+        
+      }
+    })
+    console.log(this.getMessageData);
+    
     
   }
 })
@@ -197,4 +215,4 @@ export default defineComponent({
     
     
   }
-</style>
+</style>../../../api/messagecontent../../../api/message

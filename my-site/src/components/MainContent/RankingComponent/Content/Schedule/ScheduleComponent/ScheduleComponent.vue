@@ -5,7 +5,6 @@
       <!-- NBA的赛程 -->
       <li v-if="'/ranking/nba'===currentRoute" v-for="item in nbascheduleData" >
 
-
         <!-- 比赛时间 -->
         <div class="time">{{ item.time }}</div>
 
@@ -126,7 +125,6 @@ export default defineComponent({
       { time: '12:00', teamNameOne: '勇士', teamOneLogo: 'https://img0.baidu.com/it/u=3149170547,3178474380&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1707584400&t=74133d9aff7bb80b453df85cf1ee8549', teamNameTwo: '湖人', teamTwoLogo: 'https://img1.baidu.com/it/u=641646442,2332888089&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1707584400&t=1b0bd8ce2cde8485f6ece11d5b6d2c53', gameType: 'NBA常规赛' , item: 11},
       { time: '12:00', teamNameOne: '尼克斯', teamOneLogo: 'https://img2.baidu.com/it/u=2140536083,1619924440&fm=253&fmt=auto&app=120&f=JPEG?w=997&h=720', teamNameTwo: '篮网', teamTwoLogo: 'https://img0.baidu.com/it/u=3843652562,3869303015&fm=253&fmt=auto&app=120&f=JPEG?w=720&h=548', gameType: 'NBA常规赛', item: 11  },
       { time: '12:00', teamNameOne: '雷霆', teamOneLogo: 'https://img1.baidu.com/it/u=1792299787,2659773976&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500', teamNameTwo: '湖人', teamTwoLogo: 'https://img1.baidu.com/it/u=641646442,2332888089&fm=253&app=120&size=w931&n=0&f=JPEG&fmt=auto?sec=1707584400&t=1b0bd8ce2cde8485f6ece11d5b6d2c53', gameType: 'NBA常规赛', item: 12  },
-      
       
     ]);
     return {

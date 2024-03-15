@@ -29,6 +29,15 @@ export default defineComponent({
   },
   components: {
     Login
+  },
+  mounted() { 
+    if (localStorage.getItem('token') && localStorage.getItem('userData')) {
+      this.store.commit('loginSuccess', true);
+      
+    }
+    else { 
+      this.store.commit('loginSuccess', false);
+    }
   }
 })
 </script>

@@ -7,13 +7,15 @@
     </div>
     <!-- 最右边登录按钮/头像显示 -->
     <div class="login">
-      <div class="notLogin"  v-if="loginShow">
+      <div class="notLogin"  v-if="!loginSuccess">
         <LoginButton></LoginButton>
       </div>
-      <div class="completeLogin" v-else>
+      <div class="completeLogin" v-if="loginSuccess">
         <LoginImage></LoginImage>        
       </div>
-      
+      <div class="exitLogin" v-if="loginSuccess">
+        <ExitLogin></ExitLogin>
+      </div>
     </div>
   </div>
 </template>
@@ -22,31 +24,41 @@
 import LogoImage from './LogoImage/LogoImage.vue';
 import LoginButton from './Login/LoginButton/LoginButton.vue';
 import LoginImage from './Login/LoginImage/LoginImage.vue';
+import ExitLogin from './Login/ExitLogin/ExitLogin.vue';
 import { computed, defineComponent,ref } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
   name: 'HeaderMenu',
   setup() {
     const store = useStore();
-    const isSelected = computed(()=>store.state.isSelected);
+    const isSelected = computed(() => store.state.isSelected);
     const loginShow = ref(true);
+    const loginSuccess = computed(() => store.state.loginSuccess);
+    
     
     return {
       loginShow,
       store,
-      isSelected
+      isSelected,
+      loginSuccess
+      
     }
   },
   components: {
     LogoImage,
     LoginButton,
-    LoginImage
+    LoginImage,
+    ExitLogin
   },
   methods: {
     goToHomePage() { 
       this.store.commit('handleSelected', 0);
       this.$router.push('/'); 
     }
+  },
+  mounted() {
+    
+    
   }
 })
 </script>
@@ -91,9 +103,15 @@ export default defineComponent({
     .completeLogin {
       width: 60px;
       height: 50px;
-      margin-right: 20px;
+      margin-right: 10px;
       
     }
+    .exitLogin {
+      width: 100px;
+      height: 50px;
+      margin-right: 20px;
   }
+  }
+  
 }
 </style>

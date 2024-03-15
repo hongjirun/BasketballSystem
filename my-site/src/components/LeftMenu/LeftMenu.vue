@@ -22,7 +22,7 @@ export default defineComponent({
         { name: '首页', icon: 'icon-shouye', item: 0, href:'/' },
         { name: '比赛资讯', icon: 'icon-xinwen', item: 1, href: '/news'  },
         { name: '赛程排名', icon: 'icon-paiming',  item: 2, href: '/ranking'   },
-        { name: '数据中心', icon: 'icon-shuju',  item: 3, href: '/data'   },
+        { name: '球员数据', icon: 'icon-shuju',  item: 3, href: '/data'   },
         { name: '留言板', icon: 'icon-liuyanban-05',  item: 4, href: '/message'   },
         { name: '精彩集锦', icon: 'icon-shipin', item: 5, href: '/video'   },
 

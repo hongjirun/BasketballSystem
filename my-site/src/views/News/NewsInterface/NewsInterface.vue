@@ -9,20 +9,20 @@
             <span @click="goBack">返回</span>
           </div>
           <div class="title">
-            {{ item.title }}
+            {{ item.newsTitle }}
           </div>
           <div class="time">
             <span>发布于</span>
-            <span>{{ item.time }}</span>
+            <span>{{ item.createdAt }}</span>
           </div>
         </div>
         
         <div class="content">
           <div class="img">
-            <img :src="item.img" alt="" width="300px" height="300px">
+            <img :src="item.newsImg" alt="" width="300px" height="300px">
           </div>
           <div class="contentInfo">
-            {{ item.content }}
+            {{ item.newsContent }}
           </div>
         </div>
       </li>
@@ -33,20 +33,20 @@
               <span @click="goBack">返回</span>
             </div>
             <div class="title">
-              {{ item.title }}
+              {{ item.newsTitle }}
             </div>
             <div class="time">
               <span>发布于</span>
-              <span>{{ item.time }}</span>
+              <span>{{ item.createdAt }}</span>
             </div>
           </div>
         
           <div class="content">
             <div class="img">
-              <img :src="item.img" alt="" width="300px" height="300px">
+              <img :src="item.newsImg" alt="" width="300px" height="300px">
             </div>
             <div class="contentInfo">
-              {{ item.content }}
+              {{ item.newsContent }}
             </div>
           </div>
         </li>
@@ -83,22 +83,43 @@ export default defineComponent({
     this.newId = Number(this.$route.params.id);
     // Nba
     getNbaNews().then((res) => {
-      this.getNbaNewContent = res.data;
+      this.getNbaNewContent = res.data.data;
       
       for (let i = 0; i < this.getNbaNewContent.length; i++) { 
         if (this.getNbaNewContent[i].id === this.newId) { 
           this.getNbaNewIdContent[0] = this.getNbaNewContent[i];
         }
       }
+
+      for (let i = 0; i < this.getNbaNewIdContent.length; i++) {
+        // 创建一个新的Date对象
+        const originalDate = new Date(this.getNbaNewIdContent[i].createdAt);
+
+        // 将UTC时间转换为本地时间
+        const localDate = new Date(originalDate.getTime() + originalDate.getTimezoneOffset() * 60000);
+
+        // 获取年月日时分秒
+        const year = localDate.getFullYear();
+        const month = localDate.getMonth() + 1; // 月份是从0开始计数的，所以要加1
+        const day = localDate.getDate();
+        const hours = localDate.getHours();
+        const minutes = localDate.getMinutes();
+        const seconds = localDate.getSeconds();
+
+        // 构建新的时间字符串，不包含末尾的 "Z"
+        const formattedDateTimeString = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day} ${hours}:${minutes}:${seconds}`;
+
+        this.getNbaNewIdContent[i].createdAt = formattedDateTimeString;
+      }
       
     });
     // Cba
     getCbaNews().then((res) => {
-      this.getNbaNewContent = res.data;
+      this.getCbaNewContent = res.data.data;
 
-      for (let i = 0; i < this.getNbaNewContent.length; i++) {
-        if (this.getNbaNewContent[i].id === this.newId) {
-          this.getNbaNewIdContent[0] = this.getNbaNewContent[i];
+      for (let i = 0; i < this.getCbaNewContent.length; i++) {
+        if (this.getCbaNewContent[i].id === this.newId) {
+          this.getCbaNewIdContent[0] = this.getCbaNewContent[i];
         }
       }
 
@@ -117,14 +138,18 @@ export default defineComponent({
   #newsInterface {
     width: 100%;
     height: 100%;
-    background-color: white;
+    background-color: rgb(216, 214, 214);
+    display: flex;
+    justify-content: center;
     ul {
-      width: 100%;
+      width: 80%;
       height: 100%;
       list-style: none;
+      background-color: white;
       li {
         width: 100%;
         height: 100%;
+        overflow: auto;
         .header {
           width: 100%;
           height: 10%;
@@ -147,7 +172,8 @@ export default defineComponent({
               width: 100%;
               height: 100%;
               border: 1px solid rgb(201, 199, 199);
-              background-color: rgb(215, 212, 212);
+              background-color: rgb(230, 227, 227);
+              border-radius: 0 5px 5px 0;
             }
             
           }
@@ -162,7 +188,7 @@ export default defineComponent({
             font-weight: bolder;
           }
           .time {
-            width: 10%;
+            width: 20%;
             height: 100%;
             display: flex;
             justify-content: center;
@@ -170,7 +196,7 @@ export default defineComponent({
             span {
               padding-right: 5px;
               &:nth-child(2) {
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bolder;
               }
             }

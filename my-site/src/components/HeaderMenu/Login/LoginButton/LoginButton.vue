@@ -18,6 +18,7 @@ export default defineComponent({
   methods: {
     openLoginInput(bool) {
       this.store.commit('changeLogin', bool);
+      this.store.commit('changeLoginPage', true);
     }
   }
 })

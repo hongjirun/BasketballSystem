@@ -1,13 +1,30 @@
 <template>
   <div id="LoginImage">
-    <img src="https://img1.baidu.com/it/u=2402078321,1614573229&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1703955600&t=fa620acd93e18ac6a29e8b4095015d74" alt="">
+    <img :src="userInfo.img" alt="">
+    
   </div>
 </template>
 
 <script>
-export default {
+import { defineComponent, def, computed,ref } from "vue";
+import { useStore } from "vuex";
+export default defineComponent({
+  setup() { 
+    const store = useStore();
+    const userInfo = ref({});
 
-}
+    return {
+      store,
+      userInfo
+    }
+  },
+  mounted() { 
+    if (localStorage.getItem('userData') && localStorage.getItem('token')) { 
+      this.userInfo = JSON.parse(localStorage.getItem('userData'));
+    }
+  }
+  
+})
 </script>
 
 <style lang="less" scoped>
@@ -20,6 +37,8 @@ export default {
     height: 100%;
     border-radius: 50%;
   }
+
+ 
 }
 
 </style>

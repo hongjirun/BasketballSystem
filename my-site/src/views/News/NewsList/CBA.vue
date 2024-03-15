@@ -3,21 +3,21 @@
   <div id="cba">
     <ul class="newsList">
       <li v-for="item in getNew" :key="item.id">
-        <div class="newTitle"><router-link :to="{ name: 'NewsDetailCba', params: { id: item.id } }">{{ item.title
+        <div class="newTitle"><router-link :to="{ name: 'NewsDetailCba', params: { id: item.id } }">{{ item.newsTitle
         }}</router-link></div>
         <div class="newContent">
           <div class="newImg">
             <router-link :to="{ name: 'NewsDetailCba', params: { id: item.id } }">
-              <img :src="item.img" alt="" width="105px" height="100px">
+              <img :src="item.newsImg" alt="" width="105px" height="100px">
             </router-link>
           </div>
           <div class="newInfo">
 
             <div class="new" :title="item.content">
-              {{ item.content }}
+              {{ item.newsContent }}
             </div>
 
-            <div class="newTime">{{ item.time }}</div>
+            <div class="newTime">{{ item.createdAt }}</div>
 
 
           </div>
@@ -49,8 +49,27 @@ export default defineComponent({
   mounted() {
     getCbaNews().then((res) => {
 
-      this.getNew = res.data;
+      this.getNew = res.data.data;
+      for (let i = 0; i < this.getNew.length; i++) {
+        // 创建一个新的Date对象
+        const originalDate = new Date(this.getNew[i].createdAt);
 
+        // 将UTC时间转换为本地时间
+        const localDate = new Date(originalDate.getTime() + originalDate.getTimezoneOffset() * 60000);
+
+        // 获取年月日时分秒
+        const year = localDate.getFullYear();
+        const month = localDate.getMonth() + 1; // 月份是从0开始计数的，所以要加1
+        const day = localDate.getDate();
+        const hours = localDate.getHours();
+        const minutes = localDate.getMinutes();
+        const seconds = localDate.getSeconds();
+
+        // 构建新的时间字符串，不包含末尾的 "Z"
+        const formattedDateTimeString = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day} ${hours}:${minutes}:${seconds}`;
+
+        this.getNew[i].createdAt = formattedDateTimeString;
+      }
     });
     this.leagueList();
   }
@@ -146,7 +165,7 @@ export default defineComponent({
             padding: 5px 0;
             overflow: hidden;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 4;
             /* 设置最大显示行数 */
             -webkit-box-orient: vertical;
             text-overflow: ellipsis;

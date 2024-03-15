@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import News from '../views/News/News.vue';
+import { useStore } from "vuex";
+import { ElMessage } from 'element-plus'
 
 const routes: Array<RouteRecordRaw> = [
   // 首页
@@ -7,6 +9,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: () => import('../views/Home/Home.vue'),
+    
+   
+  },
+  // 首页球星卡片信息
+  {
+    path: '/star/info/:id',
+    name: 'StarInfo',
+    component: () => import('../views/Home/StarInfo/StarInfo.vue'),
   },
   // 比赛资讯
   {
@@ -195,12 +205,41 @@ const routes: Array<RouteRecordRaw> = [
     name: 'video',
     path: '/video',
     component:()=>import('../views/VideoHighlights/VideoHighlights.vue'),
-  }
+  },
+  // 登录注册界面
+  // {
+  //   name: 'login',
+  //   path: '/login',
+  //   component:()=>import('../views/Login/Login.vue'),
+  // }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => { 
+  const store = useStore();
+  if (to.path!=='/' && !localStorage.getItem('userData') && !localStorage.getItem('token')) {
+    // 直接跳出登录框要求登录
+    store.commit('changeLogin', true);
+    // const open3 = () => {
+    //   ElMessage({
+    //     message: '该功能需要登录才能使用',
+    //     type: 'warning',
+    //   })
+    // }
+   
+  }
+  else { 
+    next();
+  }
+  
+      
+  
+    
+})
+
 
 export default router
