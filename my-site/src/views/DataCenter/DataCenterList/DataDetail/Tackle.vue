@@ -10,13 +10,13 @@
               <td>排名</td>
               <td>球员</td>
               <td>球队</td>
-              <td>助攻数</td>
+              <td>盖帽数</td>
               <td>场次</td>
               <td>上场时间</td>
             </tr>
             <!--  数据 -->
             <tr class="data" v-for="item in nbaTackleData">
-              <td>{{ item.order }}</td>
+              <td>{{ item.id }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.team }}</td>
               <td>{{ item.count }}</td>
@@ -40,7 +40,7 @@
               </tr>
               <!--  数据 -->
               <tr class="data" v-for="item in cbaTackleData">
-                <td>{{ item.order }}</td>
+                <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.team }}</td>
                 <td>{{ item.count }}</td>
@@ -57,47 +57,49 @@
 <script>
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
+import { getNbaTackle } from "../../../../api/datacenter/nbadatacenter";
+import { getCbaTackle } from "../../../../api/datacenter/cbadatacenter";
 export default defineComponent({
   setup() {
     const store = useStore();
     const dataMenuRoute = ref('');
     const nbaTackleData = ref([
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', count: 30, session: 82, time: 28.8 },
 
     ]);
     const cbaTackleData = ref([
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', count: 29.6, session: 71, time: 28.8 },
     ]);
     return {
       store,
@@ -110,6 +112,12 @@ export default defineComponent({
     this.changeMenuDataCenter();
     this.dataMenuRoute = this.$route.path;
     this.$store.commit('changeDataRoute', this.dataMenuRoute);
+    getNbaTackle().then(res => {
+      this.nbaTackleData = res.data.data;
+    });
+    getCbaTackle().then(res => {
+      this.cbaTackleData = res.data.data;
+    })
   },
   methods: {
     // 刷新后还是命中原来的的选项

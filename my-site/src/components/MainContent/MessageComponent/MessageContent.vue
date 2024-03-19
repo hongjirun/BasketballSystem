@@ -39,7 +39,7 @@
 <script >
 import { defineComponent,ref,computed } from "vue";
 import MessageInput from './MessageInput/MessageInput.vue';
-import { getMessage } from "../../../api/message";
+import { getMessage } from "../../../api/message/message";
 import { useStore } from "vuex";
 export default defineComponent({
   setup() { 
@@ -74,16 +74,17 @@ export default defineComponent({
     
   },
   mounted() {
-    this.userName = this.userInfo.userName;
-    this.userImg = this.userInfo.img;
+    this.userName = JSON.parse(localStorage.getItem('userData')).userName;
+    this.userImg = JSON.parse(localStorage.getItem('userData')).img;
     getMessage().then(res => {
-      this.getMessage = res.data; 
-      for (let i = 0; i < this.getMessage.length; i++) { 
-        this.getMessageData[i] = this.getMessage[i];
+      this.getMessageData = res.data.data;
+      // console.log(res.data.data); 
+      // for (let i = 0; i < this.getMessage.length; i++) { 
+      //   this.getMessageData[i] = this.getMessage[i];
         
-      }
+      // }
     })
-    console.log(this.getMessageData);
+    // console.log(this.getMessageData);
     
     
   }

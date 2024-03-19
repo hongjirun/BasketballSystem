@@ -17,7 +17,7 @@
             </tr>
             <!--  数据 -->
             <tr class="data" v-for="item in nbaFreeThrowData">
-              <td>{{ item.order }}</td>
+              <td>{{ item.id }}</td>
               <td>{{ item.name }}</td>
               <td>{{ item.team }}</td>
               <td>{{ item.percentages }}</td>
@@ -43,7 +43,7 @@
               </tr>
               <!--  数据 -->
               <tr class="data" v-for="item in cbaFreeThrowData">
-                <td>{{ item.order }}</td>
+                <td>{{ item.id }}</td>
                 <td>{{ item.name }}</td>
                 <td>{{ item.team }}</td>
                 <td>{{ item.percentages }}</td>
@@ -61,43 +61,45 @@
 <script>
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
+import { getNbaFreeThrow } from "../../../../api/datacenter/nbadatacenter";
+import { getCbaFreeThrow } from "../../../../api/datacenter/cbadatacenter";
 export default defineComponent({
   setup() {
     const store = useStore();
     const dataMenuRoute = ref('');
     const nbaFreeThrowData = ref([
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
-      { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
+      // { order: 1, name: '库里', team: '勇士', percentages: 30, count: 402, session: 82, time: 28.8 },
 
     ]);
     const cbaFreeThrowData = ref([
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
-      { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
+      // { order: 1, name: '郭艾伦', team: '辽宁', percentages: 30, count: 402, session: 71, time: 28.8 },
     ]);
     return {
       store,
@@ -110,6 +112,12 @@ export default defineComponent({
     this.changeMenuDataCenter();
     this.dataMenuRoute = this.$route.path;
     this.$store.commit('changeDataRoute', this.dataMenuRoute);
+    getNbaFreeThrow().then(res => {
+      this.nbaFreeThrowData = res.data.data;
+    });
+    getCbaFreeThrow().then(res => {
+      this.cbaFreeThrowData = res.data.data;
+    })
   },
   methods: {
     // 刷新后还是命中原来的的选项

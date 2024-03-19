@@ -86,70 +86,72 @@
 <script>
 import { defineComponent, ref ,computed} from "vue";
 import { useStore } from "vuex";
+import { getNbaEastRanking } from "@/api/rankingshedule/nbaeastranking";
+import { getNbaWeastRanking } from "@/api/rankingshedule/nbaweastranking";
+import { getCbaRanking } from "@/api/rankingshedule/cbaranking";
 export default defineComponent({
   setup() { 
     const store = useStore();
     const currentRoute = computed(() => store.state.currentRoute);
     const nbaEastRankingData = ref([
-      { order: 'icon-shuzi1', teamName: '凯尔特人', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-
-      { order: 'icon-shuzi2', teamName: '骑士', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi3', teamName: '雄鹿', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi4', teamName: '尼克斯', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi5', teamName: '76人', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi6', teamName: '步行者', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi7', teamName: '热火', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi8', teamName: '魔术', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi9', teamName: '公牛', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi10', teamName: '老鹰', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi11', teamName: '篮网', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi12', teamName: '猛龙', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi13', teamName: '黄蜂', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi14', teamName: '奇才', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi15', teamName: '活塞', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi1', teamName: '凯尔特人', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi2', teamName: '骑士', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi3', teamName: '雄鹿', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi4', teamName: '尼克斯', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi5', teamName: '76人', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi6', teamName: '步行者', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi7', teamName: '热火', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi8', teamName: '魔术', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi9', teamName: '公牛', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi10', teamName: '老鹰', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi11', teamName: '篮网', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi12', teamName: '猛龙', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi13', teamName: '黄蜂', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi14', teamName: '奇才', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi15', teamName: '活塞', winCount: 40, loseCount: 12, continueWL: '3连胜' },
       
       
     ]);
     const nbaWeastRankingData = ref([
-      { order: 'icon-shuzi1', teamName: '森林狼', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi1', teamName: '森林狼', winCount: 40, loseCount: 12, continueWL: '3连胜' },
 
-      { order: 'icon-shuzi2', teamName: '雷霆', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi3', teamName: '快船', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi4', teamName: '掘金', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi5', teamName: '太阳', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi6', teamName: '国王', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi7', teamName: '鹈鹕', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi8', teamName: '独行侠', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi9', teamName: '湖人', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi10', teamName: '爵士', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi11', teamName: '勇士', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi12', teamName: '火箭', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi13', teamName: '灰熊', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi14', teamName: '开拓者', winCount: 40, loseCount: 12, continueWL: '3连胜' },
-      { order: 'icon-shuzi15', teamName: '马刺', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi2', teamName: '雷霆', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi3', teamName: '快船', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi4', teamName: '掘金', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi5', teamName: '太阳', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi6', teamName: '国王', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi7', teamName: '鹈鹕', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi8', teamName: '独行侠', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi9', teamName: '湖人', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi10', teamName: '爵士', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi11', teamName: '勇士', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi12', teamName: '火箭', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi13', teamName: '灰熊', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi14', teamName: '开拓者', winCount: 40, loseCount: 12, continueWL: '3连胜' },
+      // { order: 'icon-shuzi15', teamName: '马刺', winCount: 40, loseCount: 12, continueWL: '3连胜' },
     ]);
     const rankingData = ref([
-      { order: 'icon-shuzi1', teamName: '辽宁', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi1', teamName: '辽宁', winCount: 40, loseCount: 12 },
 
-      { order: 'icon-shuzi2', teamName: '新疆', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi3', teamName: '浙江', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi4', teamName: '浙江东阳光', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi5', teamName: '广东', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi6', teamName: '深圳', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi7', teamName: '北控', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi8', teamName: '青岛', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi9', teamName: '上海', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi10', teamName: '广州', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi11', teamName: '天津', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi12', teamName: '北京', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi13', teamName: '南京', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi14', teamName: '山西', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi15', teamName: '福建', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi16', teamName: '吉林', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi17', teamName: '宁波', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi18', teamName: '四川', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi19', teamName: '江苏', winCount: 40, loseCount: 12 },
-      { order: 'icon-shuzi20', teamName: '开拓者', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi2', teamName: '新疆', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi3', teamName: '浙江', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi4', teamName: '浙江东阳光', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi5', teamName: '广东', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi6', teamName: '深圳', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi7', teamName: '北控', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi8', teamName: '青岛', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi9', teamName: '上海', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi10', teamName: '广州', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi11', teamName: '天津', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi12', teamName: '北京', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi13', teamName: '南京', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi14', teamName: '山西', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi15', teamName: '福建', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi16', teamName: '吉林', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi17', teamName: '宁波', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi18', teamName: '四川', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi19', teamName: '江苏', winCount: 40, loseCount: 12 },
+      // { order: 'icon-shuzi20', teamName: '开拓者', winCount: 40, loseCount: 12 },
       
     ]);
     return {
@@ -159,6 +161,17 @@ export default defineComponent({
       nbaWeastRankingData,
       rankingData
     }
+  },
+  mounted() { 
+    getNbaEastRanking().then(res => {
+      this.nbaEastRankingData = res.data.data;
+    });
+    getNbaWeastRanking().then(res => {
+      this.nbaWeastRankingData = res.data.data;
+    });
+    getCbaRanking().then(res => {
+      this.rankingData = res.data.data;
+    });
   }
 })
 </script>

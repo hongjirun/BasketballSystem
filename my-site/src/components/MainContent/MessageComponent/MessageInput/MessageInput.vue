@@ -27,6 +27,7 @@
 <script>
 import { defineComponent, ref } from "vue";
 import { ElMessage } from 'element-plus';
+import { postMessageData } from "../../../../api/message/message";
 export default defineComponent({
   setup() { 
     const textarea = ref('');
@@ -70,15 +71,33 @@ export default defineComponent({
         let minutes = String(currentDate.getMinutes()).padStart(2, '0');
         let formattedTime = `${year}-${month}-${day} ${hours}:${minutes}`;
         this.currentTime = formattedTime;
-        
+        // 
+        let userName = JSON.parse(localStorage.getItem('userData')).userName;
+        let telephone = JSON.parse(localStorage.getItem('userData')).telephone;
+        let img = JSON.parse(localStorage.getItem('userData')).img;
+
+
+        let data = {
+          userName: userName,
+          telephone: telephone,
+          img: img,
+          messageContent: this.textarea,
+          messageTime: this.currentTime
+        }
+        console.log(data);
+        postMessageData(data)
         // 用事件触发向父组件传递时间信息和留言信息
         this.$emit('getMessageTime', this.textarea, this.currentTime);
         // 触发消息提示
         this.successPost();
         this.textarea = '';
       }
-    }
+    },
+  },
+  mounted() { 
+    
   }
+
 
 
 

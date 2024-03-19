@@ -16,5 +16,5 @@ Mock.mock('/message', 'get', {
       messageContent: '勇士永远总冠军',
       messageTime:'2024-2-22 11:50'
     },
-  ]
+  ] 
 })
