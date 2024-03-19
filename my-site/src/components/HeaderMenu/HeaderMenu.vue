@@ -5,6 +5,10 @@
     <div class="logoImage" >
       <LogoImage @click="goToHomePage"></LogoImage>
     </div>
+    <!-- 搜索框 -->
+    <div class="search">
+      <Search></Search>
+    </div>
     <!-- 最右边登录按钮/头像显示 -->
     <div class="login">
       <div class="notLogin"  v-if="!loginSuccess">
@@ -25,6 +29,7 @@ import LogoImage from './LogoImage/LogoImage.vue';
 import LoginButton from './Login/LoginButton/LoginButton.vue';
 import LoginImage from './Login/LoginImage/LoginImage.vue';
 import ExitLogin from './Login/ExitLogin/ExitLogin.vue';
+import Search from './Search/Search.vue';
 import { computed, defineComponent,ref } from "vue";
 import { useStore } from "vuex";
 export default defineComponent({
@@ -48,7 +53,8 @@ export default defineComponent({
     LogoImage,
     LoginButton,
     LoginImage,
-    ExitLogin
+    ExitLogin,
+    Search
   },
   methods: {
     goToHomePage() { 
@@ -84,6 +90,16 @@ export default defineComponent({
     margin-left: 40px;
     cursor: pointer;
   }
+
+  .search {
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
   .login {
     /*position: absolute;
     right: 20px;
@@ -107,7 +123,7 @@ export default defineComponent({
       
     }
     .exitLogin {
-      width: 100px;
+      width: 220px;
       height: 50px;
       margin-right: 20px;
   }

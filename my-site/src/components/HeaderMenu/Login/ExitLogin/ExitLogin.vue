@@ -1,9 +1,16 @@
 <!-- 退出登录下拉列表 -->
 <template>
-  <div id="exitLogin" @click="exitLogin(false)">
-    <span class="text">退出登录</span>
-    <span class="icon"><i class="iconfont icon-tuichudenglu"></i></span>
+  <div id="exit">
+     <div class="name">
+      <span>{{ userName }}</span>
+    </div>
+    <div id="exitLogin" @click="exitLogin(false)">
+    
+      <span class="text">退出登录</span>
+      <span class="icon"><i class="iconfont icon-tuichudenglu"></i></span>
+    </div>
   </div>
+ 
 </template>
 
 <script>
@@ -15,6 +22,7 @@ export default defineComponent({
   setup() { 
     const store = useStore();
     const loginSuccess = ref(true);
+    const userName = ref('');
     const open = () => {
       ElMessage({
         showClose: true,
@@ -25,7 +33,8 @@ export default defineComponent({
     return {
       store,
       loginSuccess,
-      open
+      open,
+      userName
     }
   },
   methods: {
@@ -36,6 +45,7 @@ export default defineComponent({
       localStorage.removeItem("userData");
       localStorage.removeItem("token");
       localStorage.removeItem("starInfo");
+      this.userName = '';
       this.open();
       setInterval(() => {
         this.$router.push('/');
@@ -43,29 +53,53 @@ export default defineComponent({
       
       
     }
+  },
+  mounted() { 
+    this.userName = JSON.parse(localStorage.getItem('userData')).userName;
   }
 })
 </script>
 
 <style scoped lang="less">
-  #exitLogin {
+  #exit {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    .text {
-      color: grey;
-      font-size: 14px;
-      padding-right: 5px;
+    .name {
+      width: 60%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-right: 10px;
+      color: gold;
+      font-size: 18px;
     }
-    .icon {
-      font-size: 16px;
-      color: grey;
-    }
+    #exitLogin {
+      width: 40%;
+      height: 100%;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      cursor: pointer;
+      .text {
+        color: grey;
+        font-size: 14px;
+        padding-right: 5px;
+      }
+      .icon {
+        font-size: 16px;
+        color: grey;
+      }
     
-   
+      
+    
+    }
   }
+  
 
 </style>

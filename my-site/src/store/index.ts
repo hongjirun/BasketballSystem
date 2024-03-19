@@ -72,7 +72,9 @@ export default createStore({
     // 注册界面是否显示
     regist: false,
     // 忘记密码界面是否显示
-    forgetPwd:false,
+    forgetPwd: false,
+    // 关闭搜索框下拉列表
+    isSearch: false
   },
   mutations: {
     // 首页是否进入卡片详细介绍
@@ -149,6 +151,10 @@ export default createStore({
     // 切换忘记密码界面
     changeForgetPwdPage(state, payload) {
       state.forgetPwd = payload;
+    },
+    // 关闭搜索框下拉列表
+    changeSearch(state, payload) { 
+      state.isSearch = payload;
     }
   },
   actions: {
